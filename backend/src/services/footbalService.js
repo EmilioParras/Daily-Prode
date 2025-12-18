@@ -1,32 +1,55 @@
 const axios = require('axios');
-// const prisma = require('../config/db'); // De momento no lo usamos para ver el JSON
+const prisma = require('../config/db');
 
-const API_URL = 'https://api.football-data.org/v4/competitions';
+const API_URL = 'https://api.football-data.org/v4/';
 const API_KEY = process.env.FOOTBALL_API_KEY;
 
-const syncMatches = async (competitionCode) => {
+const getGamesCompetition = async (competitionCode) => {
   try {
-    console.log(`--- Consultando partidos de: ${competitionCode} ---`);
-
-    // IMPORTANTE: Agregamos "/matches" al final para traer el fixture
-    const response = await axios.get(`${API_URL}/${competitionCode}/matches`, {
+    const response = await axios.get(`${API_URL}competitions/${competitionCode}/matches`, { // Consulta en la API externa y devuelve los partidos de esa competicion.
       headers: { 'X-Auth-Token': API_KEY }
     });
 
-    return response.data;
+    const matches = response.data.matches;
+    const leagueName = response.data.competition.name;
 
-  } catch (error) {
-    console.error("❌ Error en syncMatches:");
-    
-    if (error.response) {
-      return { 
-        error: "Error de la API", 
-        status: error.response.status, 
-        detalle: error.response.data.message 
-      };
+    for (const m of matches) {
+      await prisma.match.upsert({
+        where: { apiMatchId: m.id },
+        update: {
+          status: m.status,
+          homeGoals: m.score.fullTime.home,
+          awayGoals: m.score.fullTime.away,
+          matchDate: new Date(m.utcDate)
+        },
+        create: {
+          apiMatchId: m.id,
+          leagueName: leagueName,
+          homeTeam: m.homeTeam.name,
+          awayTeam: m.awayTeam.name,
+          homeLogo: m.homeTeam.crest,
+          awayLogo: m.awayTeam.crest,
+          matchDate: new Date(m.utcDate),
+          status: m.status,
+          homeGoals: m.score.fullTime.home,
+          awayGoals: m.score.fullTime.away 
+        }
+      });
     }
-    return { error: error.message };
+
+    return {
+      succes: true,
+      message: `Se sincronizaron ${matches.length} partidos de ${leagueName}`
+    };
+
+  
+  } catch (error) {
+    console.error("❌ Error en syncMatches:", error.message);
+    return { 
+      success: false, 
+      error: error.response?.data?.message || error.message 
+    };
   }
 };
 
-module.exports = { syncMatches };
+module.exports = { getGamesCompetition }; // Exporto la funcion getGamesCompetition para usarla en matchRoutes.js.

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();    
-const { syncMatches } = require('../services/footbalService');
+const { getGamesCompetition } = require('../services/footbalService');
 
-router.get('/sync/:code', async (req, res) => {
+router.get('/:code', async (req, res) => {
     const { code } = req.params; // Ejemplo: 'PL' o 'PD'
-    const result = await syncMatches(code.toUpperCase());
+    const result = await getGamesCompetition(code.toUpperCase()); // Espera que getGamesCompetiton devuelva los partidos de esa competicion.
     res.json(result);
 });
 

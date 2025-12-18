@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Cuando se buscan partidos va para matchRoutes.js.
-app.use('/api/matches', matchRoutes);
+app.use('/partidos', matchRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
