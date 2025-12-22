@@ -8,6 +8,20 @@
   margin: 10px auto;
   background: #f9f9f9;
 }
-.team { display: flex; align-items: center; gap: 10px; width: 40%; }
-.vs { font-weight: bold; color: #666; }
-.date { font-size: 0.8rem; color: #999; }
+
+.team { 
+  display: flex; 
+  align-items: center;
+  gap: 10px; 
+  width: 40%; 
+}
+
+.vs { 
+  font-weight: bold; 
+  color: #666; 
+}
+
+.date { 
+  font-size: 0.8rem; 
+  color: #999; 
+}

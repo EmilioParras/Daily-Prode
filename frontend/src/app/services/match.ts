@@ -22,13 +22,17 @@ export interface Match {
   providedIn: 'root',
 })
 
-export class Match {
-  private apiUrl = 'http://localhost:3000/partidos';
+export class MatchService {
+  private API_URL = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) { }
 
-  // Método para obtener partidos por código de liga (ej: 'PL')
-  getMatchesByLeague(code: string): Observable<Match[]> {
-    return this.http.get<Match[]>(`${this.apiUrl}/${code}`);
+  getMatchesByLeague(code: string): Observable<Match[]> {  // Método para obtener el fixture por código de liga (ej: 'PL')
+    return this.http.get<Match[]>(`${this.API_URL}/fixture/${code}`);
   }
+
+  getAvaibleLeagues(): Observable<any> { // Trae las ligas disponibles en la API con el el plan FREE
+    return this.http.get<any>(`${this.API_URL}/competitions`);
+  }
+
 }

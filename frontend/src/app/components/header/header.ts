@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 import { faBars } from '@fortawesome/free-solid-svg-icons'; // Icono de hamburguesa
 import { faUser } from '@fortawesome/free-solid-svg-icons'; // Icono de perfil de usuario

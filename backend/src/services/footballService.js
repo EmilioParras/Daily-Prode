@@ -4,9 +4,9 @@ const prisma = require('../config/db');
 const API_URL = 'https://api.football-data.org/v4/';
 const API_KEY = process.env.FOOTBALL_API_KEY;
 
-const getGamesCompetition = async (competitionCode) => {
+const getGamesCompetition = async (competitionCode) => { // Trae los partidos de una competicion
   try {
-    const response = await axios.get(`${API_URL}competitions/${competitionCode}/matches`, { // Consulta en la API externa y devuelve los partidos de esa competicion.
+    const response = await axios.get(`${API_URL}competitions/${competitionCode}/matches`, { 
       headers: { 'X-Auth-Token': API_KEY }
     });
 
@@ -44,7 +44,7 @@ const getGamesCompetition = async (competitionCode) => {
 
   
   } catch (error) {
-    console.error("❌ Error en syncMatches:", error.message);
+    console.error("❌ Error en getGamesCompetition:", error.message);
     return { 
       success: false, 
       error: error.response?.data?.message || error.message 
@@ -52,4 +52,16 @@ const getGamesCompetition = async (competitionCode) => {
   }
 };
 
-module.exports = { getGamesCompetition }; // Exporto la funcion getGamesCompetition para usarla en matchRoutes.js.
+const getAvaibleLeagues = async() => { // Trae las ligas disponibles en la API con el plan FREE
+  try {
+    const response = await axios.get(`${API_URL}competitions`, {
+      headers: { 'X-Auth-Token': API_KEY }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error en getAvailableLeagues:", error.message);
+    throw error;
+  }
+};
+
+module.exports = { getGamesCompetition, getAvaibleLeagues }; // Exporto las funciones para usarlas.

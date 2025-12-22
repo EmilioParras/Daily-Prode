@@ -21,3 +21,12 @@
   font-size: 2rem;
   color: #ffffff;
 }
+
+.logo h1  {
+  cursor: pointer;
+  user-select: none;          /* Estándar */
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* IE10+ */
+  outline: none;
+}

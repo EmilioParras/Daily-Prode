@@ -1,0 +1,22 @@
+<div class="ligas-container">
+    <h2>Selecciona una Competición</h2>
+
+    <div *ngIf="loading" class="loader">
+        <div class="spinner"></div>
+        <p>Buscando las mejores ligas...</p>
+    </div>
+
+    <div class="ligas-grid" *ngIf="!loading">
+        <div class="liga-card" 
+            *ngFor="let liga of ligas" 
+            [routerLink]="['fixture/', liga.code]">
+        
+            <div class="liga-emblem">
+                <img [src]="liga.emblem" [alt]="liga.name">
+            </div>
+            
+            <h3>{{ liga.name }}</h3>
+            <p>{{ liga.area.name }}</p> 
+        </div>
+    </div>
+</div>

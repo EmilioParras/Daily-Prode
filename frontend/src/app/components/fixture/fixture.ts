@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Match } from '../../services/match';
+import { MatchService, Match } from '../../services/match';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-fixture',
+  selector: 'fixture-component',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './fixture.html',
@@ -16,7 +16,7 @@ export class FixtureComponent implements OnInit {
 
   // Inyectamos el servicio en el constructor
   constructor(
-    private matchService: Match,
+    private matchService: MatchService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {}
