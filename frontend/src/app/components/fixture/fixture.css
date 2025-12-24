@@ -4,20 +4,49 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 95vh;
+  height: 100%;
+}
+
+.fecha-encabezado {
+  background: linear-gradient(90deg, #ff9500 0%, #bd7800 100%);
+  color: #1a1a1a;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
+}
+
+.match-main {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.match-hour {
+  position: absolute;
+  top: 5px;             /* Lo pega al borde superior de la card */
+  left: 50%;
+  transform: translateX(-50%); /* Lo centra exactamente al medio */
+  font-size: 14px;
+  font-weight: bold;
+  color: #2a2a2a;
 }
 
 .match-card {
+  position: relative; 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
+  padding: 20px 15px 15px 15px;
   border: 1px solid #000000;
   max-width: 800px;
-  min-width: 100px;
   width: 100%;
-  margin: 10px auto;
+  margin: 15px auto;
   background: #ffffff;
+  border-radius: 5px;
 }
 
 .team { 
@@ -37,3 +66,4 @@
 .team-away {
   justify-content: flex-start;
 }
+

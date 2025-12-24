@@ -1,23 +1,28 @@
 <div class="fixture-container">
 
   <div class="no-matches" *ngIf="partidos.length === 0">
-    <p>No hay partidos programados para el día de hoy en esta competición.</p>
+    <p>No hay partidos programados para esta fecha.</p>
   </div>
 
-  <h2 *ngIf="partidos.length != 0" >Partidos del Día</h2>
+  <div class="fecha-encabezado" *ngIf="partidos.length > 0">
+    <h2>{{ partidos[0].matchDate | date:'d/M/yyyy' }}</h2>
+  </div>
 
-  <div *ngFor="let partido of partidos" class="match-card">
-    <div class="team">
-      <span>{{ partido.homeTeam }}</span>
-      <img [src]="partido.homeLogo" width="30" alt="">
+  <div class="games-container">
+    <div *ngFor="let partido of partidos" class="match-card">
+      <div class="match-hour">{{ partido.matchDate | date:'HH:mm' }}</div>
+
+      <div class="team">
+        <span>{{ partido.homeTeam }}</span>
+        <img [src]="partido.homeLogo" width="30" alt="">
+      </div>
+
+      <div class="line"> - </div>
+
+      <div class="team team-away">
+        <img [src]="partido.awayLogo" width="30" alt="">
+        <span>{{ partido.awayTeam }}</span>
+      </div>
     </div>
-
-    <div class="line"> - </div>
-
-    <div class="team team-away">
-      <img [src]="partido.awayLogo" width="30line" alt="">
-      <span>{{ partido.awayTeam }}</span>
-    </div>
-
   </div>
 </div>

@@ -12,9 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class FixtureComponent implements OnInit {
+
   partidos: Match[] = [];
 
-  // Inyectamos el servicio en el constructor
   constructor(
     private matchService: MatchService,
     private route: ActivatedRoute,
