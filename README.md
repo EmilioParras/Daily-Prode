@@ -1,5 +1,5 @@
 ⚽ Proyecto Personal.
-Aplicación de Prode (Pronósticos Deportivos). El sistema permite sincronizar fixtures de fútbol en tiempo real desde una API externa, gestionar usuarios y procesar predicciones de partidos.
+Página de Prode. El sistema permite sincronizar fixtures de fútbol en tiempo real desde una API externa, gestionar usuarios y procesar predicciones de partidos.
 
 🚀 Tecnologías utilizadas
 Node.js & Express: Framework principal para la API.
