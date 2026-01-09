@@ -13,10 +13,18 @@
 
 </header>
 
-<nav class="hamburguesa-menu" [class.open]="isMenuOpen">
-  <div class="secciones">
+<nav class="hamburguesa-menu side-menu" [class.open]="isMenuOpen">
+  <div class="sections">
     <span><a [routerLink]="['/rankings']" (click)="isMenuOpen = false">Rankings</a></span>
     <span>Ejemplo 1</span>
     <span>Ejemplo 2</span>
+  </div>
+</nav>
+
+<nav class="user-menu side-menu" [class.open]="isUserProfileOpen">
+  <div class="sections">
+    <span><a [routerLink]="['/profile']" (click)="isUserProfileOpen = false">Profile</a></span>
+    <span><a [routerLink]="['/settings']" (click)="isUserProfileOpen = false">Configuration</a></span>
+    <span>Logout</span>
   </div>
 </nav>

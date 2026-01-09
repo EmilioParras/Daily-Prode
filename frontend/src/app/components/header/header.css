@@ -35,26 +35,20 @@
   color: #ffffff;
 }
 
-/* Menú Hamburguesa */
-.hamburguesa-menu {
+/*----- Estilo en comun de Hamburguesa y User*/
+.side-menu {
   background-color: #1a1a1a;
   padding: 10px 0px;
   position: fixed;
   top: 5vh;
-  left: 0;
-  width: 40%;
   height: 100%;
+  width: 40%;
   border-right: 2px solid #000000;
-  transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 99;
 }
 
-.hamburguesa-menu.open {
-  transform: translateX(0);
-}
-
-.hamburguesa-menu .secciones {
+.side-menu .sections {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -63,7 +57,7 @@
   list-style: none;
 }
 
-.hamburguesa-menu span {
+.side-menu span {
   padding: 10px;
   font-size: 20px;
   padding-left: 20px;
@@ -72,12 +66,29 @@
   border-bottom: 1px solid #000000;
 }
 
-.hamburguesa-menu a {
+.side-menu a {
   text-decoration: none;
   color: #ffffff;
   cursor: pointer;
   font-weight: bold;
 }
 
+/*----- Menú Hamburguesa -----*/
+.hamburguesa-menu {
+  left: 0;
+  transform: translateX(-100%);
+}
 
+.hamburguesa-menu.open {
+  transform: translateX(0);
+}
 
+/*----- Menú Usuario -----*/
+.user-menu {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.user-menu.open {
+  transform: translateX(0);
+}
