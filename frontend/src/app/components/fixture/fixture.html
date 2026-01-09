@@ -21,15 +21,15 @@
       <div class="match-hour">{{ partido.matchDate | date:'HH:mm' }}</div>
 
       <div class="team">
-        <span>{{ partido.homeTeam }}</span>
         <img [src]="partido.homeLogo" width="30" alt="">
+        <p>{{ partido.homeTeam }}</p>
       </div>
 
       <div class="line"> - </div>
 
       <div class="team team-away">
         <img [src]="partido.awayLogo" width="30" alt="">
-        <span>{{ partido.awayTeam }}</span>
+        <p>{{ partido.awayTeam }}</p>
       </div>
     </div>
   </div>
