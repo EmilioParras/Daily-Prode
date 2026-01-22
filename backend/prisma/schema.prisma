@@ -17,6 +17,14 @@ model User {
   predictions Prediction[]
 }
 
+// En tu schema.prisma (ejemplo)
+model Competition {
+  id            Int      @id @default(autoincrement())
+  code          String   @unique
+  name          String 
+  lastUpdated   DateTime @default(now())
+}
+
 model Match {
   id             Int          @id @default(autoincrement())
   apiMatchId     Int          @unique  // ID de la API externa

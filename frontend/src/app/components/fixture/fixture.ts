@@ -15,7 +15,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 
 export class FixtureComponent implements OnInit {
 
-  partidos: Match[] = [];
+  matches: Match[] = [];
   selectedDate: Date = new Date();
   todayDate: Date = new Date();
   leagueCode: string = '';
@@ -28,7 +28,6 @@ export class FixtureComponent implements OnInit {
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {
-    // Establecer hora a medianoche para comparaciones más limpias
     this.todayDate.setHours(0, 0, 0, 0);
     this.selectedDate = new Date(this.todayDate);
   }
@@ -37,19 +36,17 @@ export class FixtureComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.leagueCode = params['leagueCode'];
       if (this.leagueCode) {
-        this.cargarPartidos(this.leagueCode, this.selectedDate);
+        this.loadGames(this.leagueCode, this.selectedDate);
       }
     })
   }
 
-  cargarPartidos(codigo: string, fecha: Date): void {
-    // Convertir fecha a formato YYYY-MM-DD para enviar al backend
-    const fechaFormateada = fecha.toISOString().split('T')[0];
-    
-    this.matchService.getMatchesByLeagueAndDate(codigo, fechaFormateada).subscribe({
+  loadGames(code: string, date: Date): void {
+    const formatedDate = date.toISOString().split('T')[0];
+    this.matchService.getMatchesByLeagueAndDate(code, formatedDate).subscribe({
       next: (data) => {
-        this.partidos = data;
-        console.log(`✅ Partidos recibidos para ${fechaFormateada}:`, this.partidos);
+        this.matches = data;
+        console.log(`✅ Partidos recibidos para ${formatedDate}:`, this.matches);
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -58,26 +55,32 @@ export class FixtureComponent implements OnInit {
     });
   }
 
-  previousDay(): void {
-    //Creo una fecha nueva para no modificar la original
+  previousDay(): void { // New date of the previus day.
     this.selectedDate = new Date(this.selectedDate);
     this.selectedDate.setDate(this.selectedDate.getDate() - 1);
-    this.cargarPartidos(this.leagueCode, this.selectedDate);
+    this.loadGames(this.leagueCode, this.selectedDate);
   }
 
-  nextDay(): void {
-    // Crear una nueva instancia de Date para no mutar la original
+  nextDay(): void { // New date of the next day.
     this.selectedDate = new Date(this.selectedDate);
     this.selectedDate.setDate(this.selectedDate.getDate() + 1);
-    this.cargarPartidos(this.leagueCode, this.selectedDate);
+    this.loadGames(this.leagueCode, this.selectedDate);
   }
 
-  isToday(): boolean {
+  isToday(): boolean { // Check if the selected date is today
     const selected = new Date(this.selectedDate);
     selected.setHours(0, 0, 0, 0);
     const today = new Date(this.todayDate);
     today.setHours(0, 0, 0, 0);
     return selected.getTime() === this.todayDate.getTime();
+  }
+
+  isMatchFinished(game: Match): boolean {
+    return game.status === 'FINISHED';
+  }
+
+  isMatchLive(game: Match): boolean {
+    return game.status === 'IN GAME';
   }
 
 }

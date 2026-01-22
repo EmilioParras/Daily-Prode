@@ -12,24 +12,32 @@
     </button>
   </div>
 
-  <div class="no-matches" *ngIf="partidos.length === 0">
-    <p>No hay partidos programados para el dia seleccionado!</p>
+  <div class="no-matches" *ngIf="matches.length === 0">
+    <p>No hay partidos en el dia seleccionado!</p>
   </div>
 
   <div class="games-container">
-    <div *ngFor="let partido of partidos" class="match-card">
-      <div class="match-hour">{{ partido.matchDate | date:'HH:mm' }}</div>
+    <div *ngFor="let match of matches" class="match-card">
+      <div class="match-hour">{{ match.matchDate | date:'HH:mm' }}</div>
 
       <div class="team">
-        <img [src]="partido.homeLogo" width="30" alt="">
-        <p>{{ partido.homeTeam }}</p>
+        <img [src]="match.homeLogo" width="30" alt="">
+        <p>{{ match.homeTeam }}</p>
       </div>
 
+      <div class="teams-goals">
+        <p>{{match.homeGoals}} </p>
+      </div>
+      
       <div class="line"> - </div>
 
+      <div class="teams-goals">
+        <p>{{match.awayGoals}} </p>
+      </div>
+
       <div class="team team-away">
-        <img [src]="partido.awayLogo" width="30" alt="">
-        <p>{{ partido.awayTeam }}</p>
+        <img [src]="match.awayLogo" width="30" alt="">
+        <p>{{ match.awayTeam }}</p>
       </div>
     </div>
   </div>

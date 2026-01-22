@@ -8,19 +8,19 @@
 
     <div class="ligas-grid" *ngIf="!loading">
         <div class="liga-card" 
-            *ngFor="let liga of ligas" 
-            [routerLink]="['fixture/', liga.code]"> 
+            *ngFor="let league of leagues" 
+            [routerLink]="['fixture/', league.code]"> 
         
             <div class="liga-emblem">
-                <img [src]="liga.emblem" [alt]="liga.name">
+                <img [src]="league.emblem" [alt]="league.name">
             </div>
             
-            <h3>{{ liga.name }}</h3>
+            <h3>{{ league.name }}</h3>
 
-            <p class="matches-count" *ngIf="liga.matchesCount !== null">
-              {{ liga.matchesCount }} Partido{{ liga.matchesCount === 1 ? '' : 's' }} hoy
+            <p class="matches-count" *ngIf="league.matchesCount !== null">
+              {{ league.matchesCount }} Partido{{ league.matchesCount === 1 ? '' : 's' }} hoy
             </p>
-            <p class="matches-loading" *ngIf="liga.matchesCount === null">Cargando...</p>
+            <p class="matches-loading" *ngIf="league.matchesCount === null">Cargando...</p>
         </div>
     </div>
 </div>
